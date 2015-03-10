@@ -1,1 +1,1 @@
-A web app that tells you when your next circle line train will show up (because it does ..sometimes)
+A web app that tells you when your next circle line train shows up (because it does show up sometimes)
