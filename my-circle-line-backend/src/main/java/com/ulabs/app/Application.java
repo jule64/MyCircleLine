@@ -1,4 +1,4 @@
-package com.ulabs.app;
+package main.java.com.ulabs.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
