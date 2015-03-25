@@ -14,7 +14,7 @@ Sure you might argue that there are apps that do that for all the lines on the L
 
 
 # How it works
-mycircleline.co.uk is a single page website on one end and a Java back end on the other.  The back end polls train data from the london TFL server, applies XML to JSON transformations and serves the data on demand to users who see it in a nicely formatted colourful webpage.
+mycircleline.co.uk is a single page web front end on one end and a Java back end on the other.  The back end polls train data from the london TFL server, applies XML to JSON transformations and serves the data on demand to users who see it in a nicely formatted colourful webpage.
 
 The front end is hosted for free here on GitHub while the backend sits on Amazon EC2.
 
