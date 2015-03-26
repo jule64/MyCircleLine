@@ -1,4 +1,4 @@
-package main.java.com.ulabs.model;
+package com.ulabs.model;
 
 /**
  * Created by julienmonnier on 22/03/2015.

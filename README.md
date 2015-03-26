@@ -1,25 +1,25 @@
+# mycircleline.co.uk
 
 mycircleline.co.uk is a groundbreaking software technology that let's you to mine hundreds of bitcoins at no cost!
 
-well maybe on day ...
+well maybe one day ...
 
-For now though is a single page webapp that displays information about trains on the London Circle Line network :)
-
-
-# Why this website
-mycircleline is aimed at people who rely specifically on the Circle Line train to commute.  For example commuters at Liverpool street station heading south know how infrequent the circle line train is on this platform.  With mycircleline they can manage their commute even before leaving the office (the apps show up to three scheduled trains, that's up to 30 mins of heads up!)
-
-Sure you might argue that there are apps that do that for all the lines on the London network.  Well if that's the case then here's another reason for this website: it's just fun to build a web site! :)
-
+For now though it's a simple web application that displays live information about trains on the London Circle Line network!
 
 
 # How it works
-mycircleline.co.uk is a single page web front end on one end and a Java back end on the other.  The back end polls train data from the london TFL server, applies XML to JSON transformations and serves the data on demand to users who see it in a nicely formatted colourful webpage.
+mycircleline.co.uk has two components: a web front end and a Java back end powered by the Spring web framework.
 
-The front end is hosted for free here on GitHub while the backend sits on Amazon EC2.
+The service works as follow:  a user accesses mycircleline.co.uk and requests information for upcoming trains on a given station, say Sloan Square station.  The user request is captured in a JQuery object which sends an AJAX request to the Java back end and receives a JSON response.  The JSON response is then processed in a callback function and populated in the webpage.
 
-The website is accessible publicly from the url mentioned above.
+The back end itself has two responsibilities: 
+      1. serve user requests and 
+      2. retrieve train information from the TFL cloud service and parse the data into Java objects for use in 1.
+
+These two responsibilities run independently on two separate threads.  For 1. we use the Spring framework to channel user http requests to the relevant controllers and send responses back.  Spring also automatically convert responses from Java objects into JSON.
+The TFL data meanwhile is polled at regular interval and parsed from XML using standard XML DOM parser to populate the application's internal objects.  This last process is repeated every 30 seconds (maximum allowed polling frequency by the cloud service).
+
+The front end is hosted for free here on GitHub while the backend sits on Amazon EC2, which also means that we get to use CORS for our cross site requests. just to make things a little more interesting :)
 
 
-Happy code browsing!
-
+Happy browsing!

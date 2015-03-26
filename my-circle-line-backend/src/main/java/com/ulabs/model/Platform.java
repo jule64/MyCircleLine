@@ -1,4 +1,4 @@
-package main.java.com.ulabs.model;
+package com.ulabs.model;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package main.java.com.ulabs.parsers.tfl;
+package com.ulabs.parsers.tfl;
 
 import com.ulabs.model.Platform;
 import com.ulabs.model.Station;

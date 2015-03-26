@@ -1,4 +1,4 @@
-package main.java.com.ulabs.controllers;
+package com.ulabs.controllers;
 
 import java.util.concurrent.atomic.AtomicLong;
 

@@ -1,4 +1,4 @@
-package main.java.com.ulabs.services;
+package com.ulabs.services;
 
 import com.ulabs.model.Station;
 import com.ulabs.parsers.tfl.TubeLineParser;
