@@ -1,4 +1,4 @@
-package com.ulabs.controllers;
+package com.ulabs.filters;
 
 /**
  * Created by julienmonnier on 17/03/2015.

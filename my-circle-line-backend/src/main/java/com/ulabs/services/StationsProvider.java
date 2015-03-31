@@ -1,11 +1,10 @@
 package com.ulabs.services;
 
 import com.ulabs.model.Station;
-import com.ulabs.parsers.tfl.TubeLineParser;
+import com.ulabs.parsers.tfl.TubeInfoParser;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Logger;
 
 /**
@@ -19,7 +18,7 @@ public class StationsProvider {
 
     public StationsProvider(){
         //TODO add a parserReady method
-        TubeLineParser.startParser(stations);
+        TubeInfoParser.startParser(stations);
         logger.info("station provider created");
     }
 
@@ -27,6 +26,12 @@ public class StationsProvider {
 
         logger.info("user XX requested station: " + code);
         return stations.get(code);
+    }
+
+    public Collection<Station> getStationsList() {
+
+        logger.info("user XX requested all stations list");
+        return stations.values();
     }
 
 }

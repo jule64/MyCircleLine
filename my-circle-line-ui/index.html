@@ -1,58 +1,168 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 
-<head>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="jule64" content="">
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
 
-    <title>Test Jul</title>
+    <title>MyCircle Line</title>
 
     <!--for prod-->
     <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
 
     <!--for dev-->
-    <script src="bower_components/jquery/dist/jquery.js" type="text/javascript"></script>
+
+    <script src="bower_components/angularjs/angular.js" type="text/javascript"></script>
+
+    <link href="ulabs/assets/cover.css" rel="stylesheet">
+
 
 </head>
 
-
 <body>
-<div>
-    <button id="SSQ">get next trains</button><br>
-    <div id="SSQResp"></div>
+
+
+<div class="container">
+
+    <div class="row">
+
+    </div>
+
+</div>
+
+<div style="width: 100%">
+
+    <div id="WelcomeMsg" style="width: 100%; height:20%; display: inline-block; text-align: center">
+
+        <p>Welcome to MyCircleLine</p>
+        <p>Please select a train from the list below</p>
+        <br><br>
+        <i id="LoadingMsg">
+            <p>Please note this service is currently available from 6:30am to 9am and from 5pm to 7pm</p>
+            <p>loading ...</p>
+        </i>
+
+    </div>
+    
+    <div style="height: 80%">
+        
+        <div style="float:left; width: 20%">
+    
+            <div id="TrainList"></div>
+    
+        </div>
+        <div id="leftPan" style="float:left">
+    
+            <div id="TrainInfo"></div>
+    
+        </div>
+        
+        
+        
+    </div>
+
+
+
+
 </div>
 
 
+    <!--<div style="width: 60%;">-->
+    <!--</div>-->
+
+    <!--<div style="clear:both"></div>-->
+
+
+
+    <script src="bower_components/jquery/dist/jquery.js" type="text/javascript"></script>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" >
 </body>
 
 <script type="text/javascript">
 
+    function mainModule(){
 
+        var trainInfoTagRef = '#TrainInfo'
+        var selectedTrainID = 'LST' // Liv Street station, default value
+        var trainTimeout
 
-    $('#SSQ').on('click',function(event){
+        initStationsList = function(){
 
-        $('#SSQResp').empty();
-        $.get("http://82.11.201.224:8081/stations?code=SSQ",
-            function(data) {
-                $("<p/>").html(data.name + " (updated ("+data.curTime + ") seconds ago)").appendTo("#SSQResp");
-//                $("<p/>").html(data.curTime).appendTo("#SSQResp");
+            var hasUrlReturned = false
 
-                data.platforms.forEach(function(p){
-                    $("<p/>").html("## "+p.name).appendTo("#SSQResp");
+            $.get("http://82.11.201.224:8081/allstations",
+                    function(data) {
+                        hasUrlReturned = true
+                        $('#LoadingMsg').empty()
+                        data.forEach(function(station){
+                            $("<p/>").attr('onclick','selectedTrain('+"'"+station.code+"'"+')').html(station.name).appendTo('#TrainList');
 
-                    if(p.trains.length>0){
-                        p.trains.forEach(function(t){
-                            var orderNum = ["1st","2nd","3rd"];
-                            $("<p/>").html(orderNum[t.index()]+" Circle Line train in " + t.timeTo + " min").appendTo("#SSQResp");
-                        });
-                    } else {
-                        $("<p/>").html("There are no Circle Line trains reported on this platform").appendTo("#SSQResp");
+                        })
+
                     }
-                })
-            }
-    )})
+            )
+
+            setTimeout(function(){
+
+                if(!hasUrlReturned){
+
+                    $('#LoadingMsg').empty()
+
+                    $("</p>").html("The service is currently delayed or unavailable.  We apologies for the inconvenience").appendTo('#LoadingMsg')
+
+                }
+
+            }, 7000);
+
+        }
+
+        selectedTrain = function (selectedTrainID){
+
+
+            clearTimeout(trainTimeout)
+
+
+
+            $.get("http://82.11.201.224:8081/stations?code="+selectedTrainID,
+                    function(data) {
+                        $(trainInfoTagRef).empty();
+                        $("<p/>").html(data.name + " (updated ('"+data.curTime + ") seconds ago)").appendTo(trainInfoTagRef);
+
+                        data.platforms.forEach(function(p){
+                            $("<p/>").html("## "+p.name).appendTo(trainInfoTagRef);
+
+                            var trainRank = ["1st","2nd","3rd","4th"];
+
+                            if(p.trains.length==0){
+                                $("<p/>").html("There are no Circle Line trains reported on this platform").appendTo(trainInfoTagRef);
+                            } else {
+                                for(var i=0;i<p.trains.length;++i){
+                                    if(i<trainRank.length){
+                                        $("<p/>").html(trainRank[i]+" Circle Line train in " + p.trains[i].timeTo + " min").appendTo(trainInfoTagRef);
+                                    }
+                                }
+                            }
+                        })
+                    }
+            ).error(function(data){
+                        $("<p/>").html("The service is unavailable").appendTo(trainInfoTagRef);
+                    }
+            )
+
+            trainTimeout = setTimeout(selectedTrain,30000,selectedTrainID)
+
+        }
+
+        initStationsList();
+
+    };
+
+    document.onload(mainModule());
 
 
 </script>

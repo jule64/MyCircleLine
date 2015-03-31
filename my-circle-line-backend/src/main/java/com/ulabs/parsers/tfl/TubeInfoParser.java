@@ -3,6 +3,7 @@ package com.ulabs.parsers.tfl;
 import com.ulabs.model.Platform;
 import com.ulabs.model.Station;
 import com.ulabs.model.Train;
+import com.ulabs.shared.Shared;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -12,28 +13,28 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.ConnectException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * Created by julienmonnier on 20/03/2015.
  */
-public class TubeLineParser extends Thread {
+public class TubeInfoParser extends Thread {
 
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    Logger logger = Logger.getLogger(Shared.MYCIRCLELINE_LOGGER);
 
-    //INFO this is really only tube info for circle in liverpool street station
-    //need change to all stations
-//    private final String DISTRICTLINE_URL = "http://cloud.tfl.gov.uk/TrackerNet/PredictionDetailed/H/SSQ";
-    private final String DISTRICTLINE_URL = "http://cloud.tfl.gov.uk/TrackerNet/PredictionSummary/H";
-    private DocumentBuilder dBuilder;
+    private DocumentBuilder documentBuilder;
     private Map<String,Station> stations;
 
-    private TubeLineParser(Map<String, Station> stations) throws ParserConfigurationException {
+    private TubeInfoParser(Map<String, Station> stations) throws ParserConfigurationException {
 
         this.stations = stations;
         initParser();
@@ -42,7 +43,7 @@ public class TubeLineParser extends Thread {
     private void initParser() {
 
         try {
-            dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         }
@@ -83,12 +84,30 @@ public class TubeLineParser extends Thread {
         }
     }
 
-    private void parseTubeLineInfoFromURL() throws ParserConfigurationException, IOException, SAXException {
+    private void parseTubeLineInfoFromURL() throws IOException, SAXException {
 
-        Document doc = dBuilder.parse(new URL(DISTRICTLINE_URL).openStream());
+        InputStream stream = null;
+
+        while(stream==null){
+            try {
+                stream = new URL(Shared.CIRCLELINE_PREDICTION_SUMMARY_URL).openStream();
+            } catch(ConnectException e){
+                logger.log(Level.SEVERE, "cannot connect to " + Shared.CIRCLELINE_PREDICTION_SUMMARY_URL);
+            } catch (MalformedURLException e) {
+                logger.log(Level.SEVERE, e.getMessage());
+            } catch (IOException e) {
+                logger.log(Level.SEVERE, e.getMessage());
+            }
+            if(stream==null){
+                try {
+                    Thread.sleep(30000);
+                } catch (InterruptedException e1) {
+                    logger.log(Level.SEVERE, e1.getMessage());
+                }
+            }
+        }
+        Document doc = documentBuilder.parse(stream);
         doc.getDocumentElement().normalize();
-//        NodeList nList = doc.getElementsByTagName("staff");
-
         parseStationsInfo(doc);
 
     }
@@ -145,8 +164,6 @@ public class TubeLineParser extends Thread {
                     && trainNode.getAttributes().getNamedItem("D").getNodeValue().equals("702")){
 
                 Train train = new Train();
-//                String timeToInSeconds = trainNode.getAttributes().getNamedItem("SecondsTo").getNodeValue();
-//                train.setTimeTo(convertSecondsToMinutes(timeToInSeconds));
 
                 train.setTimeTo(trainNode.getAttributes().getNamedItem("C").getNodeValue());
 
@@ -169,13 +186,13 @@ public class TubeLineParser extends Thread {
 
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
 
-        new TubeLineParser(null).startParsing();
+        new TubeInfoParser(null).startParsing();
 
     }
 
     public static void startParser(Map<String, Station> stations) {
         try {
-            new TubeLineParser(stations).start();
+            new TubeInfoParser(stations).start();
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         }
