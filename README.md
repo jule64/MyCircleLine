@@ -1,10 +1,8 @@
-# mycircleline.co.uk
+# MyCircleLine.co.uk
 
-mycircleline.co.uk is a groundbreaking software technology that let's you to mine hundreds of bitcoins at no cost!
+mycircleline.co.uk is a small web application that provides live information about trains running on the London Circle Line network!
 
-well maybe one day ...
-
-For now it's a small web application that displays live information about trains running on the London Circle Line network!
+It is a useful tool for those commuters who rely primarily on the Circle Line to travel to and from work.
 
 
 ## How it works
@@ -27,7 +25,7 @@ These two responsibilities run independently on two separate threads.  For 1. we
 The TFL data meanwhile is polled at regular interval and parsed from XML using standard XML DOM parser to populate the application's internal objects.  This last process is repeated every 30 seconds (maximum allowed polling frequency by the cloud service).
 
 ### Hosting
-The front end is hosted for free here on GitHub while the backend sits on Amazon EC2, which also means that we get to use CORS for our cross site requests. just to make things a little more interesting :)
+The front end is hosted for free here on GitHub while the backend sits on Amazon EC2, which also means that we get to use **CORS** for our cross site requests. just to make things a little more interesting :)
 
 
 ## Happy browsing :D
