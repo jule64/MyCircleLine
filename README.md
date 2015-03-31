@@ -31,3 +31,15 @@ The front end is hosted for free here on GitHub while the backend sits on Amazon
 
 
 ## Happy browsing :D
+
+
+
+## TODOs
+
+### UI
+* Look at having users last selection persisted between sessions (might need back end work)
+
+
+
+### Back End
+* Access to the `stations` map not currently thread safe - need fix
