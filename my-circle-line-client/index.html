@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)http://getbootstrap.com/examples/jumbotron-narrow/ -->
+<html lang="en">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Your little commute companion">
+    <meta name="keywords" content="travel, commute, london, web development, CSS, JavaScript, bootstrap, JQuery, front-end, frontend, CORS, Java">
+    <meta name="author" content="julien@unshift.com">
+
+    <!--TODO create icon-->
+    <link rel="icon" href="ulabs/assets/icons/mcl.ico">
+
+    <title>MyCircleLine</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- For Prod -->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
+
+    <!--For Dev-->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" >
+
+    <!-- Custom styles for this template -->
+    <link href="ulabs/assets/css/mycircleline-custom.css" rel="stylesheet">
+
+
+    <script>
+
+        /* google analytics func */
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-61496311-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+
+</head>
+
+<body class="body-text">
+
+
+<div class="header clearfix">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <h3 class="text-muted">MyCircleLine.co.uk</h3>
+
+        </div>
+    </nav>
+
+</div>
+
+
+<section>
+
+    <div class="container">
+        <div class="jumbotron">
+            <div id="trainInfoBox">
+                <br>
+                <h2><i>Please select a station</i></h2>
+
+                <!--<h2>Liverpool Street Station</h2>-->
+
+                <!--<p class="lead" style="font-size: 20px;">Some MCL text. Some MCL text. </p>-->
+                <!--<p class="lead" style="font-size: 18px;">Some MCL text. Some MCL text. </p>-->
+                <!--<p class="lead" style="font-size: 16px;">Some MCL text. Some MCL text. </p>-->
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+<div class="container">
+    <div class="row marketing">
+
+        <div id="loading-msg" class="col-md-12 text-center">
+            <h4><i>loading ...</i></h4>
+        </div>
+
+
+        <div id="left-list" class="col-md-6 text-center">
+
+        </div>
+
+        <div id="right-list" class="col-md-6 text-center">
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© Crafted by Ulabs 2015</p>
+    </footer>
+
+</div>
+
+
+</body>
+
+<!--JQuery-->
+
+<!--For Prod-->
+<!--<script src="bower_components/jquery/dist/jquery.min.js"></script>-->
+
+<!--For Dev-->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+
+
+
+<!--BootStrap js-->
+
+<!--For Prod-->
+<!--<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>-->
+
+<!--For Dev-->
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+
+
+
+<!--mycircleline js-->
+<script src="ulabs/assets/scripts/main.js"></script>
+
+<script>
+    document.onload(mainModule());
+</script>
+
+
+</html>

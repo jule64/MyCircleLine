@@ -34,10 +34,17 @@ The front end is hosted for free here on GitHub while the backend sits on Amazon
 
 ## TODOs
 
-### UI
-* Look at having users last selection persisted between sessions (might need back end work)
+### git
+* put client project in own project for git page hosting
 
+
+### Client
+* Look at having users last selection persisted between sessions (might need back end work)
+* create mcl icon
+* tidy up html
+* remove trailing dots from stations names
 
 
 ### Back End
 * Access to the `stations` map not currently thread safe - need fix
+* save stations list as own list instead of hitting the stations map
