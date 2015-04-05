@@ -40,11 +40,12 @@ The front end is hosted for free here on GitHub while the backend sits on Amazon
 
 ### Client
 * Look at having users last selection persisted between sessions (might need back end work)
-* create mcl icon
-* tidy up html
-* remove trailing dots from stations names
+* create mcl icon (done)
+* tidy up html (in progress)
+* remove trailing dots from stations names - back end work
+* if train is 0 min change message to "train at platform" instead of current message "in - min"
 
 
 ### Back End
 * Access to the `stations` map not currently thread safe - need fix
-* save stations list as own list instead of hitting the stations map
+* save stations list in separate list to avoid hitting the stations map

@@ -62,7 +62,7 @@ function mainModule(){
 
                     var trainRank = ["1st","2nd","3rd","4th"];
                     if(p.trains.length==0){
-                        $("<p/>").attr('class','lead').attr('style','font-size: 16px;').html("<i>No Circle Line trains reported on this platform</i>").appendTo(trainInfoTagRef);
+                        $("<p/>").attr('class','lead').attr('style','font-size: 16px;').html("<i>No Circle Line trains reported for this platform</i>").appendTo(trainInfoTagRef);
                     } else {
                         for(var i=0;i<p.trains.length;++i){
                             if(i<trainRank.length){
@@ -79,6 +79,10 @@ function mainModule(){
         ).error(function(data){
                 $(trainInfoTagRef).empty();
                 $("<h3/>").html("The service is unavailable").appendTo(trainInfoTagRef);
+                $('#left-list').empty()
+                $('#right-list').empty()
+                $('<h4/>').html('<i>Oops... we are down sorry!</i>').appendTo('#loading-msg')
+
             }
         )
 
