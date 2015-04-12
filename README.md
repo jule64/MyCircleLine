@@ -1,21 +1,25 @@
-# MyCircleLine.co.uk
+# MyCircleLine
 
-mycircleline.co.uk is a small web application that provides live information about trains running on the London Circle Line network!
+MyCircleLine is a small web application that provides live information about trains running on the London Circle Line network.
 
-It is a useful tool for those commuters who rely primarily on the Circle Line to travel to and from work.
+It is a useful tool for those commuters who rely primarily on the Circle Line to travel to and from work.  A typical example would be a City worker waiting for a train at Liverpool Street station and heading to Victoria
+
+
+## Open the app
+The app is accessible at  **[jule64.github.io/MyCircleLine](http://jule64.github.io/MyCircleLine)**
 
 
 ## How it works
-mycircleline.co.uk has two components: a web front end and a Java back end powered by the Spring framework.
+MyCircleLine has two components: a web client and a Java back end.
 
-### Front End
-a user accesses **[mycircleline.co.uk](http://mycircleline.co.uk)** and requests information about upcoming trains on a given station, say Sloan Square station.
+### Web Client
+a user accesses the url above and clicks on a station name, say Victoria station, to requests information about upcoming trains for that station.
 
 The user request is captured in a **JQuery** object which sends an AJAX request to the Java back end and receives a JSON response.  The JSON response is then processed in a callback function and populated in the webpage.
 
 **Bootstrap** is used for rendering UI components
 
-### Back end
+### Back End
 The back end itself has two responsibilities: 
       1. serve user requests and 
       2. retrieve train information from the TFL cloud service and parse the data into Java objects for use in 1.
@@ -34,16 +38,14 @@ The front end is hosted for free here on GitHub while the backend sits on Amazon
 
 ## TODOs
 
-### git
-* put client project in own project for git page hosting
-
-
 ### Client
 * Look at having users last selection persisted between sessions (might need back end work)
 * create mcl icon (done)
 * tidy up html (in progress)
 * remove trailing dots from stations names - back end work
 * if train is 0 min change message to "train at platform" instead of current message "in - min"
+* use favico.js to add update animation to mcl favicon (see http://lab.ejci.net/favico.js/)
+use textillate to animate text (http://jschr.github.io/textillate/) 
 
 
 ### Back End
