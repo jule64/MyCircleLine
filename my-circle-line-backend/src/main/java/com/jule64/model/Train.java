@@ -1,4 +1,4 @@
-package com.ulabs.model;
+package com.jule64.model;
 
 /**
  * Created by julienmonnier on 22/03/2015.

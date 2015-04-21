@@ -1,15 +1,13 @@
-package com.ulabs.controllers;
+package com.jule64.controllers;
 
 
 
 import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
-import com.ulabs.model.Station;
-import com.ulabs.services.StationsProvider;
+
+import com.jule64.model.Station;
+import com.jule64.services.StationsProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 /**
  * Created by julienmonnier on 26/03/2015.

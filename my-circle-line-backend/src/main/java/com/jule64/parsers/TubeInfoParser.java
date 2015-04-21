@@ -1,9 +1,9 @@
-package com.ulabs.parsers.tfl;
+package com.jule64.parsers;
 
-import com.ulabs.model.Platform;
-import com.ulabs.model.Station;
-import com.ulabs.model.Train;
-import com.ulabs.shared.Shared;
+import com.jule64.model.Platform;
+import com.jule64.model.Station;
+import com.jule64.model.Train;
+import com.jule64.shared.Shared;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -72,9 +72,7 @@ public class TubeInfoParser extends Thread {
 
             logger.info("stations updated in "+(System.currentTimeMillis()-startTime)+" milliseconds");
 
-            long timeSinceLastUpdate = 60000L - (System.currentTimeMillis()-startTime);
-
-
+            long timeSinceLastUpdate = 30000L - (System.currentTimeMillis()-startTime);
 
             try {
                 Thread.sleep(timeSinceLastUpdate>=0 ? timeSinceLastUpdate:0);

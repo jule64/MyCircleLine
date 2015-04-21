@@ -49,5 +49,5 @@ use textillate to animate text (http://jschr.github.io/textillate/)
 
 
 ### Back End
-* Access to the `stations` map not currently thread safe - need fix
+* run a concurrency test with several polling clients and parser updates
 * save stations list in separate list to avoid hitting the stations map

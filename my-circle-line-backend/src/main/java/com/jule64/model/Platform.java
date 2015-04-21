@@ -1,4 +1,4 @@
-package com.ulabs.model;
+package com.jule64.model;
 
 import java.util.List;
 
