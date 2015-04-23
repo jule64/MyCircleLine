@@ -22,7 +22,7 @@ public class SimpleCORSFilter implements Filter {
 
 
 
-    private static List<String> allowedOrigins = Arrays.asList(new String[]{"http://mycircleline.julienmonnier.com","http://julienmonnier.com","http://localhost:63342"});
+    private static List<String> allowedOrigins = Arrays.asList("http://mycircleline.julienmonnier.com","http://julienmonnier.com","http://localhost:63342");
 
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) res;
