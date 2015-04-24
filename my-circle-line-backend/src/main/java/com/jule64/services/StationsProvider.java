@@ -2,6 +2,7 @@ package com.jule64.services;
 
 import com.jule64.model.Station;
 import com.jule64.parsers.TubeInfoParser;
+import com.jule64.shared.Shared;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -14,7 +15,7 @@ import java.util.logging.Logger;
 @Component()
 public class StationsProvider {
 
-    Logger logger = Logger.getLogger(this.getClass().getName());
+    Logger logger = Logger.getLogger(Shared.MYCIRCLELINE_LOGGER);
     private Map<String, Station> stations = new ConcurrentHashMap<String, Station>(128,0.75f,1);
 
     public StationsProvider(){
@@ -25,13 +26,11 @@ public class StationsProvider {
 
     public Station getStation(String code) {
 
-        logger.info("user XX requested station: " + code);
         return stations.get(code);
     }
 
     public Collection<Station> getStationsList() {
 
-        logger.info("user XX requested all stations list");
         return stations.values();
     }
 
