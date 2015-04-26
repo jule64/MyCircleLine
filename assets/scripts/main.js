@@ -12,7 +12,7 @@ function mainModule(){
 
         var hasUrlReturned = false
 
-        $.get("http://82.11.201.224:8081/allstations",
+        $.get("http://mycircleline.co.uk/allstations",
             function(data) {
                 hasUrlReturned = true
                 $('#loading-msg').empty()
@@ -51,7 +51,7 @@ function mainModule(){
 
         clearTimeout(trainTimeout)
 
-        $.get("http://82.11.201.224:8081/stations?code="+selectedTrainID,
+        $.get("http://mycircleline.co.uk/stations?code="+selectedTrainID,
             function(data) {
                 $(trainInfoTagRef).empty();
                 $("<h2/>").html(data.name).appendTo(trainInfoTagRef);
