@@ -6,33 +6,33 @@ It is a useful tool for those commuters who rely primarily on the Circle Line to
 
 
 ## Open the app
-The app is accessible at  **[jule64.github.io/MyCircleLine](http://jule64.github.io/MyCircleLine)**
+The app is accessible at  **[julienmonnier.com/MyCircleLine](http://julienmonnier.com/MyCircleLine)**
 
 
 ## How it works
 MyCircleLine has two components: a web client and a Java back end.
 
 ### Web Client
-a user accesses the url above and clicks on a station name, say Victoria station, to requests information about upcoming trains for that station.
+A user accesses the url above and clicks on a station name, say Victoria station, to requests information about upcoming trains for that station.
 
-The user request is captured in a **JQuery** object which sends an AJAX request to the Java back end and receives a JSON response.  The JSON response is then processed in a callback function and populated in the webpage.
+Under the hood the user request is captured in a **JQuery** object which sends an **AJAX** GET request to the Java back end and receives a **JSON** response containing the upcoming train times.  The train times are then populated in the webpage using a callback function.
 
-**Bootstrap** is used for rendering UI components
+**[Bootstrap](http://getbootstrap.com/)** is used for rendering the UI components which allows the app to work nicely on mobile devices.
 
 ### Back End
-The back end itself has two responsibilities: 
-      1. serve user requests and 
-      2. retrieve train information from the TFL cloud service and parse the data into Java objects for use in 1.
+The back end is build in Java and has two responsibilities:
+      1. serve http requests coming from the client
+      2. retrieve train information from the TFL cloud service and create the trains and stations objects.
 
-These two responsibilities run independently on two separate threads.  For 1. we use the **Spring framework** to channel user http requests to the relevant controllers and send responses back.  Spring also automatically convert responses from Java objects into JSON.
+These two responsibilities run independently on two separate threads.  We use the **Spring MVC framework** is used to channel the user requests to the relevant controllers and send responses back.  Spring also automatically converts responses from Java objects into JSON.
 
-The TFL data meanwhile is polled at regular interval and parsed from XML using standard XML DOM parser to populate the application's internal objects.  This last process is repeated every 30 seconds (maximum allowed polling frequency by the cloud service).
+The second thread meanwhile parses the TFL data at regular interval intervals using an XML DOM parser and populates the data into the application's object model.  This last process is repeated every 30 seconds (maximum allowed polling frequency by the TFL cloud service).
 
 ### Hosting
-The front end is hosted for free here on GitHub while the backend sits on Amazon EC2, which also means that we get to use **CORS** for our cross site requests. just to make things a little more interesting :)
+The front end is hosted for free [GitHub](https://github.com/) while the backend sits on an Amazon EC2 server (well actually on my Macbook for now..).  The separation of client hosting and server means that we use **CORS** to do our cross site requests, just to make things a little more interesting :)
 
 
-## Happy browsing :D
+
 
 
 
