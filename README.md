@@ -46,6 +46,7 @@ The front end is hosted for free [GitHub](https://github.com/) while the backend
 * if train is 0 min change message to "train at platform" instead of current message "in - min"
 * use favico.js to add update animation to mcl favicon (see http://lab.ejci.net/favico.js/)
 use textillate to animate text (http://jschr.github.io/textillate/) 
+* turn client app into an AngularJS app
 
 
 ### Back End
