@@ -7,12 +7,16 @@ function mainModule(){
     var trainInfoTagRef = '#trainInfoBox'
     var selectedTrainID = 'LST' // Liv Street station, default value
     var trainTimeout
+    var server_url
 
     initStationsList = function(){
 
+        if(window.location.port == '63342' || window.location.port == '8081') { server_url = 'http://localhost:8081'}
+        else { server_url = 'http://mycircleline.co.uk' }
+
         var hasUrlReturned = false
 
-        $.get("http://mycircleline.co.uk/allstations",
+        $.get(server_url+'/allstations',
             function(data) {
                 hasUrlReturned = true
                 $('#loading-msg').empty()
@@ -51,7 +55,7 @@ function mainModule(){
 
         clearTimeout(trainTimeout)
 
-        $.get("http://mycircleline.co.uk/stations?code="+selectedTrainID,
+        $.get(server_url + '/stations?code='+selectedTrainID,
             function(data) {
                 $(trainInfoTagRef).empty();
                 $("<h2/>").html(data.name).appendTo(trainInfoTagRef);
