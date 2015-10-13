@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import com.jule64.model.Station;
 import com.jule64.services.StationsProvider;
 import com.jule64.shared.Shared;
+import org.apache.catalina.connector.RequestFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +30,13 @@ public class StationsListController {
     @RequestMapping("/allstations")
     public Collection<Station> allStations(HttpServletRequest request) {
 
-        final String userIpAddress = request.getRemoteAddr();
+        final String userIpAddress;
+        if(request instanceof RequestFacade) {
+            userIpAddress = ((RequestFacade) request).getHeader("x-real-ip");
+
+        } else {
+            userIpAddress = request.getRemoteAddr();
+        }
         final String userAgent = request.getHeader("user-agent");
         logger.info("user "+userIpAddress+" requested all stations list");
 

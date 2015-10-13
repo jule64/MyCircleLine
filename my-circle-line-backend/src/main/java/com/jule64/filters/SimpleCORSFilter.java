@@ -22,18 +22,18 @@ public class SimpleCORSFilter implements Filter {
 
 
 
-    private static List<String> allowedOrigins = Arrays.asList("http://mycircleline.julienmonnier.com","http://julienmonnier.com","http://localhost:63342");
+    private static List<String> allowedOrigins = Arrays.asList("http://mycircleline.co.uk","http://mycircleline.julienmonnier.com","http://julienmonnier.com","http://localhost:63342");
 
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) res;
-//        response.setHeader("Access-Control-Allow-Origin", "http://localhost:63342");
 
-        if (allowedOrigins.contains(((RequestFacade) req).getHeader("origin"))) {
+        if (req instanceof RequestFacade && allowedOrigins.contains(((RequestFacade) req).getHeader("origin"))) {
             response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "GET");
+            response.setHeader("Access-Control-Max-Age", "3600");
+            response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
         }
-        response.setHeader("Access-Control-Allow-Methods", "GET");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+
         chain.doFilter(req, res);
     }
 
