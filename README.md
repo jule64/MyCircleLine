@@ -20,16 +20,13 @@ Under the hood the user request is captured in a **JQuery** object which sends a
 **[Bootstrap](http://getbootstrap.com/)** is used for rendering the UI components which allows the app to work nicely on mobile devices.
 
 ### Back End
-The back end is build in Java and has two responsibilities:
-      1. serve http requests coming from the client
-      2. retrieve train information from the TFL cloud service and create the trains and stations objects.
 
-These two responsibilities run independently on two separate threads.  We use the **Spring MVC framework** is used to channel the user requests to the relevant controllers and send responses back.  Spring also automatically converts responses from Java objects into JSON.
+We use Spring MVC to route client requests into our controllers and send requested train data back.  The train data itself is independently retrieved from the TFL cloud service at regular interval and made available through a StationsProvider class.
 
-The second thread meanwhile parses the TFL data at regular interval intervals using an XML DOM parser and populates the data into the application's object model.  This last process is repeated every 30 seconds (maximum allowed polling frequency by the TFL cloud service).
+We use a standard XML DOM parser to parse the TFL data into POJOs which can then be queried by our controllers.  Spring takes care of converting our POJOs into JSON responses for use into the web clients.
 
 ### Hosting
-The front end is hosted for free [GitHub](https://github.com/) while the backend sits on an Amazon EC2 server (well actually on my Macbook for now..).  The separation of client hosting and server means that we use **CORS** to do our cross site requests, just to make things a little more interesting :)
+The front end is hosted for free on [GitHub](https://github.com/) while the backend runs on an Amazon EC2 server (well actually on my Macbook for now but on Amazon hopefully soon!).  The separation of client hosting and server means that we use **CORS** to do our cross site requests, just to make things a little more interesting :)
 
 
 
